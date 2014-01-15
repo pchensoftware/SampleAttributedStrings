@@ -30,9 +30,9 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.title = @"Attributed Strings";
     
-    self.plainStringLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 50, 300, 20)];
+    self.plainStringLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 150, 300, 20)];
     self.plainStringLabel.numberOfLines = 0;
     self.plainStringLabel.textAlignment = NSTextAlignmentCenter;
     self.plainStringLabel.text = @"This is a plain old string";
@@ -47,12 +47,13 @@
 }
 
 - (void)setLabelTextWithAttributedString {
-    NSString *text = @"\nThis is an attributed string. Normal. Italics. Blue. Underline. Strikethrough.";
+    NSString *text = @"\nThis is an attributed string. Normal. CLICK ME. Italics. Blue. Underline. Strikethrough.";
     NSDictionary *attributes = @{
                                  NSFontAttributeName : [UIFont boldSystemFontOfSize:15],
                                  };
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:text attributes:attributes];
     [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:[text rangeOfString:@"Normal"]];
+    [attributedString addAttribute:NSLinkAttributeName value:[NSURL URLWithString:@"http://github.com/pchensoftware"] range:[text rangeOfString:@"CLICK ME"]];
     [attributedString addAttribute:NSFontAttributeName value:[UIFont italicSystemFontOfSize:15] range:[text rangeOfString:@"Italics"]];
     [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:[text rangeOfString:@"Blue"]];
     [attributedString addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleDouble) range:[text rangeOfString:@"Underline"]];
